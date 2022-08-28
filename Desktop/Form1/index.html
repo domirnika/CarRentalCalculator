@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="author" content="D">
+<title>Kalkulator kosztów wynajmu</title>
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+</div>
+<body background="css/tlo5.png"> 
+<br>
+<center><span> <strong>Kalkulator kosztów wynajmu samochodu</strong> </span> </center> 
+<center> <br> <br>
+<div class="z1">
+    <div> Ile lat temu otrzymałeś prawo jazdy? :<input type="number" name="input_z1" id="input_z1" />  
+
+    </div>
+</div>
+<br>
+<div id="z2">
+    <div>Ilość kilometrów, które planujesz przejechać : <input type="number" name="input_z2" id="input_z2" /> 
+    </div>
+</div>
+<br>
+
+W jakim terminie masz zamiar wypożyczać auto?
+<br>
+
+<label for="start">Data rozpoczęcia:</label>
+<input type="date" id="start" name="start">
+<br>
+<label for="start">Data zakończenia:</label>
+<input type="date" id="end" name="end">
+<br>
+<br>
+ Jakim autem chcesz jeździć? 
+<select name='lista' id="input_z4">
+    <option>basic</option>
+    <option>standard</option>
+	<option>medium</option>
+	<option>premium</option>
+
+  </select>
+
+<br><br>
+<div id="znik">
+<input type="button" name="button_z" id="button_z" value="Sprawdź cenę" onclick="sprawdz_z()"/>
+</div>
+
+<p id="h"> </p>
+<p id="z"> </p>
+<p id="r"> </p>
+<p id="d"> </p>
+
+</center>
+
+<h6 style="position: absolute; bottom: 0; border-top: 1px solid white">
+Cena za 1l paliwa = 7zł <br>
+Auto typu basic - 0% dopłaty<br>
+Auto typu standard - 30% dopłaty<br>
+Auto typu medium - 60% dopłaty<br>
+Auto typu premium - 100% dopłaty<br>
+Podstawowa cena za dobę - 70 zł <br> <br>
+</h6>
+<script>
+
+var input = document.querySelector("#input_z1");
+var input2 = document.querySelector("#input_z2");
+var input3 = document.querySelector("#input_z3");
+var input4 = document.querySelector("#input_z4");
+
+	
+var btn = document.querySelector("#button_z");
+document.addEventListener("check", sprawdz_z );
+
+function sprawdz_z(){  
+
+var start = document.getElementById("start").value;
+var end = document.getElementById("end").value;
+
+var dateOne = new Date(start);
+var dateTwo = new Date(end);
+var time = Math.abs(dateTwo - dateOne);
+
+    // alert('hello');              
+    //1 basic, 1.3 standard, 1.6 medium, 2 premium dla osób mających prawo jazdy więcej niż 5 lat
+	// 100km to 7l paliwa, czyli 49zł bo 7zł cena paliwa. Wychodzi 0,49zł za km.
+	//70 zł to cena za dobę wypożyczenia auta
+	// 23% VAT 
+    console.log(input.value);
+    console.log('ciao');
+	
+    if(input.value < 5 && input4.value == "basic") {
+	
+    var jeden = 1.2 * ((time/ (1000 * 60 * 60 * 24)) * 70 + input2.value * 0.49);
+	jeden = Math.round (jeden * 100)/100;
+	var dwa = (1.2 * (time/ (1000 * 60 * 60 * 24) * 70 + input2.value * 0.49))* 1.23;
+	dwa = Math.round (dwa * 100)/100;
+	document.getElementById("h").innerHTML = "Dziękuję za informację!";	
+	document.getElementById("z").innerHTML = "Cena netto wyniesie: " + jeden +"zł"+ "  .Brutto natomiast: "+ dwa +"zł"; 
+	document.getElementById("znik").innerHTML = " ";
+	document.getElementById("d").innerHTML = "Ilość dni wynajmowania samochodu: " + time/ (1000 * 60 * 60 * 24);
+	
+	} else if (input.value < 5 && input4.value == "standard"){
+    var jeden = 1.2 *  (time/ (1000 * 60 * 60 * 24) * 70 + input2.value * 0.49) *1.3;
+	jeden = Math.round (jeden * 100)/100;
+	var dwa = (1.2 *  ((time/ (1000 * 60 * 60 * 24)) * 70 + input2.value * 0.49) *1.3) *1.23;
+	dwa = Math.round (dwa * 100)/100;
+	document.getElementById("h").innerHTML = "Dziękuję za informację!";		
+	document.getElementById("z").innerHTML = "Cena netto wyniesie: " + jeden + "zł" + ". Brutto natomiast: " + dwa + "zł";
+	document.getElementById("znik").innerHTML = " ";
+	document.getElementById("d").innerHTML = "Ilość dni wynajmowania samochodu: " + time/ (1000 * 60 * 60 * 24);
+    
+	} else if (input.value < 5 && input4.value == "medium"){
+	var jeden = 1.2 * ((time/ (1000 * 60 * 60 * 24)) * 70 + input2.value * 0.49) *1.6 ;
+	jeden = Math.round (jeden * 100)/100;
+	var dwa = 	(1.2 * ((time/ (1000 * 60 * 60 * 24)) * 70 + input2.value * 0.49) *1.6) *1.23 ;
+	dwa = Math.round (dwa * 100)/100;	
+	document.getElementById("h").innerHTML = "Dziękuję za informację!";	
+    document.getElementById("z").innerHTML = " Cena netto wyniesie: " + jeden + "zł"+ ". Brutto natomiast: "  + dwa + "zł";
+	document.getElementById("znik").innerHTML = " ";
+    document.getElementById("d").innerHTML = "Ilość dni wynajmowania samochodu: " + time/ (1000 * 60 * 60 * 24);
+	
+	} else if (input.value < 5 && input.value >= 3 && input4.value == "premium"){
+	var jeden = 1.2 * ((time/ (1000 * 60 * 60 * 24)) * 70 + input2.value * 0.49) *2 ;
+	jeden = Math.round (jeden * 100)/100;
+	var dwa = 	(1.2 * ((time/ (1000 * 60 * 60 * 24)) * 70 + input2.value * 0.49) *2) *1.23 ;
+	dwa = Math.round (dwa * 100)/100;	
+	document.getElementById("h").innerHTML = "Dziękuję za informację!";	
+    document.getElementById("z").innerHTML = " Cena netto wyniesie: " + jeden + "zł"+ ". Brutto natomiast: "  + dwa + "zł";
+	document.getElementById("znik").innerHTML = " ";
+    document.getElementById("d").innerHTML = "Ilość dni wynajmowania samochodu: " + time/ (1000 * 60 * 60 * 24);
+		
+	
+	}else if (input.value < 3 && input4.value == "premium"){
+    document.getElementById("z").innerHTML = "Niestety samochód premium jest dla kierowców z wyższym stażem";
+	document.getElementById("znik").innerHTML = " ";
+    
+	} else if (input.value >= 5 && input4.value == "basic"){
+	var jeden = 1 * ((time/ (1000 * 60 * 60 * 24)) * 70 + input2.value * 0.49) *1;
+	jeden = Math.round (jeden * 100)/100;
+	var dwa = (1 * ((time/ (1000 * 60 * 60 * 24)) * 70 + input2.value * 0.49) *1)* 1.23;
+	dwa = Math.round (dwa * 100)/100;	
+	document.getElementById("h").innerHTML = "Dziękuję za informację!";	
+    document.getElementById("z").innerHTML = "Cena netto wyniesie: " + jeden + "zł" + ". Brutto natomiast: " + dwa + "zł"; 
+	document.getElementById("znik").innerHTML = " ";
+	document.getElementById("d").innerHTML = "Ilość dni wynajmowania samochodu: " + time/ (1000 * 60 * 60 * 24);
+    
+	} else if (input.value >= 5 && input4.value == "standard"){
+	var jeden = 1 * ((time/ (1000 * 60 * 60 * 24)) * 70 + input2.value * 0.49) *1.3;
+	jeden = Math.round (jeden * 100)/100;	
+	var dwa = (1 * ((time/ (1000 * 60 * 60 * 24)) * 70 + input2.value * 0.49) *1.3) * 1.23;
+	dwa = Math.round (dwa * 100)/100;	
+	document.getElementById("h").innerHTML = "Dziękuję za informację!";	
+    document.getElementById("z").innerHTML = " Cena netto wyniesie: " + jeden + "zł" + ". Brutto natomiast: " + dwa + "zł" ;
+   	document.getElementById("znik").innerHTML = " ";
+	document.getElementById("d").innerHTML = "Ilość dni wynajmowania samochodu: " + time/ (1000 * 60 * 60 * 24);
+    
+	} else if (input.value >= 5 && input4.value == "medium"){
+	var jeden = 1 * ((time/ (1000 * 60 * 60 * 24)) * 70 + input2.value * 0.49) *1.6;
+	jeden = Math.round (jeden * 100)/100;    
+	var dwa = (1 * ((time/ (1000 * 60 * 60 * 24)) * 70 + input2.value * 0.49) *1.6 ) *1.23;
+	dwa = Math.round (dwa * 100)/100;
+	document.getElementById("h").innerHTML = "Dziękuję za informację!";			
+    document.getElementById("z").innerHTML = " Cena netto wyniesie: " + jeden + "zł" + ". Brutto natomiast: " + dwa + "zł";
+	document.getElementById("znik").innerHTML = " ";
+	document.getElementById("d").innerHTML = "Ilość dni wynajmowania samochodu: " + time/ (1000 * 60 * 60 * 24);
+    
+	} else if (input.value >= 5 && input4.value == "premium") {
+	var jeden =1 * ((time/ (1000 * 60 * 60 * 24)) * 70 + input2.value * 0.49) * 2;
+	jeden = Math.round (jeden * 100)/100;    
+	var dwa= (1 * ((time/ (1000 * 60 * 60 * 24)) * 70 + input2.value * 0.49) * 2) * 1.23;
+	dwa = Math.round (dwa * 100)/100;
+	document.getElementById("h").innerHTML = "Dziękuję za informację!";			
+    document.getElementById("z").innerHTML = " Cena netto wyniesie: " + jeden + "zł" + ". Brutto natomiast: "  + dwa + "zł";
+    document.getElementById("znik").innerHTML = " ";
+	document.getElementById("d").innerHTML = "Ilość dni wynajmowania samochodu: " + time/ (1000 * 60 * 60 * 24);
+	
+	}
+ 
+} ; 
+
+
+</script>
+
+</body>
+</html>
