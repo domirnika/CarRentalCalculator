@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dominika Rabczak" />
+    <meta name="description" content="Car Rental Calculator" />
+    <title>Kalkulator kosztów wynajmu</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script></script>
+  </head>
+  <body>
+    <script src="javas.js"></script>
+    <div class="center">
+      <h1>Kalkulator kosztów wynajmu samochodu</h1>
+      <div class="years_ago">
+        Ile lat temu otrzymałeś prawo jazdy? :<input
+          type="number"
+          name="input_years_ago"
+          id="input_years_ago"
+        />
+      </div>
+      <div id="km">
+        Ilość kilometrów, które planujesz przejechać :
+        <input type="number" name="input_km" id="input_km" />
+      </div>
+      <div>W jakim terminie masz zamiar wypożyczać auto?</div>
+      <div class="date">
+        <label for="start">Data rozpoczęcia:</label>
+        <input type="date" id="start" name="start" />
+        <label for="start">Data zakończenia:</label>
+        <input type="date" id="end" name="end" />
+      </div>
+      <div>
+        Jakim autem chcesz jeździć?
+        <select name="input_car_type" id="input_car_type">
+          <option>basic</option>
+          <option>standard</option>
+          <option>medium</option>
+          <option>premium</option>
+        </select>
+      </div>
+      <div id="btn_disappear">
+        <input
+          type="button"
+          name="btn_disappear"
+          id="btn_disappear"
+          value="Sprawdź cenę"
+          onclick="calculations()"
+        />
+      </div>
+      <p id="line1"></p>
+      <p id="line2"></p>
+      <p id="line3"></p>
+      <p id="line4"></p>
+      <p id="line5"></p>
+    </div>
+    <ul class="information">
+      <li>Cena za 1l paliwa = 7zł</li>
+      <li>Auto typu basic - 0% dopłaty</li>
+      <li>Auto typu standard - 30% dopłaty</li>
+      <li>Auto typu medium - 60% dopłaty</li>
+      <li>Auto typu premium - 100% dopłaty</li>
+      <li>Podstawowa cena za dobę - 70 zł</li>
+    </ul>
+    <script src="javas.js"></script>
+  </body>
+</html>
